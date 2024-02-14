@@ -30,6 +30,7 @@ namespace Pro.Mys.MatchDatabase
 
         protected override void OnStop()
         {
+
             WriteToFile("Service is stopped at " + DateTime.Now);
         }
         private void OnElapsedTime(object source, ElapsedEventArgs e)
