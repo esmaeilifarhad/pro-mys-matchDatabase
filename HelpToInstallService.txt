@@ -1,0 +1,14 @@
+E:\Projects\professionalApp\Pro.Mys.WindowsService\Pro.Mys.MatchDatabase\Pro.Mys.MatchDatabase\bin\Debug\Pro.Mys.MatchDatabase.exe
+
+cd C:\Windows\Microsoft.NET\Framework\v4.0.30319 
+
+InstallUtil.exe E:\Projects\professionalApp\Pro.Mys.WindowsService\Pro.Mys.MatchDatabase\Pro.Mys.MatchDatabase\bin\Debug\Pro.Mys.MatchDatabase.exe
+
+Syntax InstallUtil.exe -u E:\Projects\professionalApp\Pro.Mys.WindowsService\Pro.Mys.MatchDatabase\Pro.Mys.MatchDatabase\bin\Debug\Pro.Mys.MatchDatabase.exe
+
+InstallUtil.exe + Your copied path + \your service name + .exe
+
+
+Syntax InstallUtil.exe -u + Your copied path + \your service name + .exe
+
+

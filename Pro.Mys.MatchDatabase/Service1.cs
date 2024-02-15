@@ -25,7 +25,7 @@ namespace Pro.Mys.MatchDatabase
         {
             //WriteToFile("Service is started at " + DateTime.Now);
             timer.Elapsed += new ElapsedEventHandler(OnElapsedTime);
-            timer.Interval = 1*60*1000; //number in milisecinds
+            timer.Interval = 15*60*1000; //number in milisecinds
             timer.Enabled = true;
         }
 
@@ -36,7 +36,8 @@ namespace Pro.Mys.MatchDatabase
         }
         private void OnElapsedTime(object source, ElapsedEventArgs e)
         {
-           // WriteToFile("Service is recall at " + DateTime.Now);
+             WriteToFile("Service is recall at " + DateTime.Now);
+            SendDutyTaskByEmail();
         }
         public void WriteToFile(string Message)
         {
@@ -63,19 +64,20 @@ namespace Pro.Mys.MatchDatabase
             }
         }
 
-        public async Task SendEmail(string bodyHtml, string subject, string mailUserName)
+        public async Task SendDutyTaskByEmail()
         {
             var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:9003/api/message/sendemail");
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:9003/api/Database/SendDutyTaskByEmail");
 
-            var obj = new
-            {
-                body = bodyHtml,
-                subject = subject,
-                mailUserName = mailUserName
-            };
-            var body = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
-            var content = new StringContent(body, null, "application/json");
+            //var obj = new
+            //{
+            //    body = bodyHtml,
+            //    subject = subject,
+            //    mailUserName = mailUserName
+            //};
+            //var body = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            //var content = new StringContent(body, null, "application/json");
+            var content = new StringContent("", null, "text/plain");
             request.Content = content;
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
