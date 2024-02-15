@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,18 +25,18 @@ namespace Pro.Mys.MatchDatabase
         {
             //WriteToFile("Service is started at " + DateTime.Now);
             timer.Elapsed += new ElapsedEventHandler(OnElapsedTime);
-            timer.Interval = 5000; //number in milisecinds
+            timer.Interval = 1*60*1000; //number in milisecinds
             timer.Enabled = true;
         }
 
         protected override void OnStop()
         {
 
-            WriteToFile("Service is stopped at " + DateTime.Now);
+           // WriteToFile("Service is stopped at " + DateTime.Now);
         }
         private void OnElapsedTime(object source, ElapsedEventArgs e)
         {
-            WriteToFile("Service is recall at " + DateTime.Now);
+           // WriteToFile("Service is recall at " + DateTime.Now);
         }
         public void WriteToFile(string Message)
         {
@@ -61,5 +62,26 @@ namespace Pro.Mys.MatchDatabase
                 }
             }
         }
+
+        public async Task SendEmail(string bodyHtml, string subject, string mailUserName)
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:9003/api/message/sendemail");
+
+            var obj = new
+            {
+                body = bodyHtml,
+                subject = subject,
+                mailUserName = mailUserName
+            };
+            var body = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            var content = new StringContent(body, null, "application/json");
+            request.Content = content;
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+           // Console.WriteLine(await response.Content.ReadAsStringAsync());
+        }
+
+
     }
 }

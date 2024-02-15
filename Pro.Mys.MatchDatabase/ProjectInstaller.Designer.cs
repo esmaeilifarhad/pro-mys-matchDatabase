@@ -42,9 +42,9 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.Description = "My First Service demo";
-            this.serviceInstaller1.DisplayName = "MyFirstService.Demo";
-            this.serviceInstaller1.ServiceName = "Service1";
+            this.serviceInstaller1.Description = "DescriptionSendDutyTaskByEmail";
+            this.serviceInstaller1.DisplayName = "DisplayNameSendDutyTaskByEmail";
+            this.serviceInstaller1.ServiceName = "ServiceNameSendDutyTaskByEmail";
             // 
             // ProjectInstaller
             // 
